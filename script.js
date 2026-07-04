@@ -1,136 +1,118 @@
-// ===============================
-// ستاره ها
-// ===============================
-const stars = document.querySelector(".stars");
+// =====================
+// CINEMATIC ENGINE FINAL
+// =====================
 
-for (let i = 0; i < 120; i++) {
-    const s = document.createElement("div");
-    s.className = "star";
-    s.style.left = Math.random() * 100 + "%";
-    s.style.top = Math.random() * 100 + "%";
-    s.style.animationDelay = Math.random() * 3 + "s";
-    stars.appendChild(s);
-}
-
-// ===============================
-// قلب ها
-// ===============================
-const hearts = document.getElementById("hearts");
-
-function createHeart() {
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.innerHTML = "❤️";
-    h.style.left = Math.random() * 100 + "vw";
-    h.style.fontSize = (15 + Math.random() * 25) + "px";
-    h.style.animationDuration = (4 + Math.random() * 3) + "s";
-
-    hearts.appendChild(h);
-
-    setTimeout(() => h.remove(), 7000);
-}
-
-setInterval(createHeart, 300);
-
-// ===============================
-// صحنه ها
-// ===============================
-const scenes = document.querySelectorAll(".scene");
-let current = 0;
-
-function showScene(i) {
-    scenes.forEach(scene => scene.classList.remove("active"));
-    scenes[i].classList.add("active");
-}
-
-// ===============================
-// تایپ متن
-// ===============================
-function typeText(element, text, speed = 50) {
-    element.innerHTML = "";
-
-    let i = 0;
-
-    function typing() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typing, speed);
-        }
-    }
-
-    typing();
-}
-
-// ===============================
-// موزیک
-// ===============================
 const music = document.getElementById("bgMusic");
+const startBtn = document.getElementById("startBtn");
 const musicBtn = document.getElementById("musicBtn");
 
-let isPlaying = false;
+const scenes = [
+  document.getElementById("scene1"),
+  document.getElementById("scene2"),
+  document.getElementById("scene3"),
+  document.getElementById("scene4")
+];
 
-music.volume = 0.45;
+const texts = [
+  "",
+  "همه چیز از یک نگاه شروع شد...\nو دنیا برایم عوض شد...",
+  "حقیقت این است...\nتو تبدیل به آرامش قلب من شدی...",
+  "پایان نیست...\nاین فقط شروع یک احساس ابدی است... ❤️"
+];
 
-function toggleMusic() {
+let currentScene = 0;
+let isMusicPlaying = false;
 
-    if (isPlaying) {
-        music.pause();
-        musicBtn.innerHTML = "🔇";
-    } else {
-        music.play().catch(() => {});
-        musicBtn.innerHTML = "🔊";
-    }
+// =====================
+// START EXPERIENCE
+// =====================
+startBtn.addEventListener("click", startExperience);
 
-    isPlaying = !isPlaying;
+function startExperience() {
+  startBtn.style.display = "none";
+
+  playMusic();
+
+  showScene(1);
+
+  setTimeout(() => showScene(2), 8000);
+  setTimeout(() => showScene(3), 16000);
+  setTimeout(() => showScene(4), 24000);
 }
 
-musicBtn.onclick = toggleMusic;
+// =====================
+// MUSIC CONTROL
+// =====================
+function playMusic() {
+  music.volume = 0;
 
-// ===============================
-// شروع داستان
-// ===============================
-document.getElementById("startBtn").onclick = () => {
+  music.play().then(() => {
+    isMusicPlaying = true;
+    fadeInMusic();
+  }).catch(() => {
+    console.log("Autoplay blocked");
+  });
+}
 
-    // شروع موزیک
-    music.play().catch(() => {});
-    isPlaying = true;
+function fadeInMusic() {
+  let v = 0;
+
+  const fade = setInterval(() => {
+    if (v < 0.6) {
+      v += 0.02;
+      music.volume = v;
+    } else {
+      clearInterval(fade);
+    }
+  }, 100);
+}
+
+// =====================
+// SCENE CONTROLLER
+// =====================
+function showScene(num) {
+  scenes.forEach(s => s.classList.remove("active"));
+
+  const scene = scenes[num - 1];
+  scene.classList.add("active");
+
+  currentScene = num;
+
+  typeWriter(scene.querySelector(".story"), texts[num - 1]);
+}
+
+// =====================
+// TYPEWRITER EFFECT
+// =====================
+function typeWriter(el, text) {
+  if (!el) return;
+
+  el.innerHTML = "";
+  let i = 0;
+
+  const speed = 40;
+
+  const t = setInterval(() => {
+    if (i < text.length) {
+      el.innerHTML += text.charAt(i);
+      i++;
+    } else {
+      clearInterval(t);
+    }
+  }, speed);
+}
+
+// =====================
+// MUSIC BUTTON TOGGLE
+// =====================
+musicBtn.addEventListener("click", () => {
+  if (!isMusicPlaying) {
+    music.play();
+    isMusicPlaying = true;
     musicBtn.innerHTML = "🔊";
-
-    current = 1;
-    showScene(current);
-
-    setTimeout(() => {
-
-        typeText(
-            document.querySelector("#scene2 .story"),
-            "از لحظه‌ای که دیدمت، دنیا آروم‌تر شد... انگار همه چیز معنی پیدا کرد..."
-        );
-
-    }, 800);
-
-    setTimeout(() => {
-
-        current = 2;
-        showScene(current);
-
-        typeText(
-            document.querySelector("#scene3 .story"),
-            "تو فقط یک اسم نیستی... تو دلیل تپش این قلبی ❤️"
-        );
-
-    }, 6000);
-
-    setTimeout(() => {
-
-        current = 3;
-        showScene(current);
-
-        typeText(
-            document.querySelector("#scene4 .story"),
-            "و این فقط شروع یک داستان عاشقانه واقعی است... ❤️"
-        );
-
-    }, 12000);
-
-};
+  } else {
+    music.pause();
+    isMusicPlaying = false;
+    musicBtn.innerHTML = "🔇";
+  }
+});
