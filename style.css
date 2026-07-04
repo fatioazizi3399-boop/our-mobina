@@ -1,131 +1,203 @@
+/* ===== تنظیمات کلی ===== */
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
-
-background:#000;
-
-overflow:hidden;
-
-height:100vh;
-
-font-family:Tahoma;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-color:white;
-
+    background:#000;
+    color:white;
+    font-family:Tahoma,sans-serif;
+    overflow:hidden;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
+
+/* ===== پس زمینه ===== */
 
 .background{
-
-position:fixed;
-
-width:100%;
-
-height:100%;
-
-background:radial-gradient(circle,#111,#000);
-
-z-index:-5;
-
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:
+    radial-gradient(circle at top,#2b2200,#000 70%);
+    z-index:-5;
 }
 
+/* ===== ستاره ها ===== */
+
+.stars{
+    position:fixed;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    z-index:-4;
+}
+
+/* ===== محتوای اصلی ===== */
+
 .container{
-
-text-align:center;
-
+    text-align:center;
+    padding:20px;
 }
 
 .top-text{
 
-color:#d4af37;
-
-font-size:22px;
-
-margin-bottom:20px;
-
-letter-spacing:2px;
+    color:#d4af37;
+    font-size:22px;
+    letter-spacing:2px;
+    margin-bottom:25px;
 
 }
 
 .title{
 
-font-size:70px;
+    font-size:75px;
+    color:#FFD700;
 
-color:#FFD700;
+    text-shadow:
+    0 0 10px gold,
+    0 0 25px gold,
+    0 0 45px gold;
 
-text-shadow:
-
-0 0 10px gold,
-
-0 0 25px gold,
-
-0 0 45px gold;
-
-animation:glow 2s infinite alternate;
+    animation:glow 2s infinite alternate;
 
 }
 
 .subtitle{
 
-margin-top:25px;
-
-font-size:22px;
-
-line-height:2;
-
-color:#ddd;
+    margin-top:25px;
+    color:#ddd;
+    line-height:2;
+    font-size:22px;
 
 }
 
 button{
 
-margin-top:40px;
+    margin-top:40px;
 
-padding:15px 40px;
+    padding:16px 45px;
 
-border:none;
+    border:none;
 
-border-radius:40px;
+    border-radius:50px;
 
-background:gold;
+    background:linear-gradient(45deg,#FFD700,#c89b00);
 
-font-size:20px;
+    color:black;
 
-cursor:pointer;
+    font-size:20px;
 
-transition:.4s;
+    cursor:pointer;
+
+    transition:.4s;
 
 }
 
 button:hover{
 
-transform:scale(1.1);
+    transform:scale(1.08);
 
-box-shadow:0 0 30px gold;
+    box-shadow:
+    0 0 20px gold,
+    0 0 50px gold;
 
 }
+
+/* ===== قلب ===== */
+
+.heart{
+
+    position:fixed;
+
+    color:#ff4d6d;
+
+    animation:float 7s linear forwards;
+
+    opacity:.8;
+
+}
+
+/* ===== ستاره ===== */
+
+.star{
+
+    position:fixed;
+
+    width:3px;
+
+    height:3px;
+
+    background:gold;
+
+    border-radius:50%;
+
+    animation:blink 2s infinite alternate;
+
+}
+
+/* ===== انیمیشن ها ===== */
 
 @keyframes glow{
 
-from{
+    from{
 
-text-shadow:0 0 10px gold;
+        text-shadow:
+        0 0 10px gold,
+        0 0 20px gold;
+
+    }
+
+    to{
+
+        text-shadow:
+        0 0 25px gold,
+        0 0 50px gold,
+        0 0 80px gold;
+
+    }
 
 }
 
-to{
+@keyframes float{
 
-text-shadow:0 0 45px gold;
+    from{
+
+        transform:translateY(0) scale(1);
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:translateY(-110vh) scale(2);
+
+        opacity:0;
+
+    }
 
 }
+
+@keyframes blink{
+
+    from{
+
+        opacity:.2;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
 
 }
