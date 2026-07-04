@@ -2,86 +2,146 @@
 <html lang="fa" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Mobina ❤️</title>
 
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Amin ❤️ Mobina</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-    <!-- موزیک پس‌زمینه -->
-    <audio id="bgMusic" preload="auto" loop>
-        <source src="music.mp3" type="audio/mpeg">
-        مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
-    </audio>
+<audio id="bgMusic" loop preload="auto">
+<source src="music.mp3" type="audio/mpeg">
+</audio>
 
-    <!-- دکمه کنترل موزیک -->
-    <div class="music-control" id="musicBtn">🔊</div>
+<canvas id="stars"></canvas>
 
-    <!-- افکت‌ها -->
-    <div class="background"></div>
-    <div class="stars"></div>
-    <div id="hearts"></div>
+<div id="overlay"></div>
 
-    <!-- صحنه اول -->
-    <section class="scene active" id="scene1">
+<div id="flash"></div>
 
-        <h3 class="top-text">
-            برای خاص‌ترین دختر دنیا
-        </h3>
+<div id="particles"></div>
 
-        <h1 class="title">
-            Mobina ❤️
-        </h1>
+<div id="hearts"></div>
 
-        <p class="subtitle">
-            این فقط یک سایت نیست...
-            <br>
-            این تمام احساس قلب منه...
-        </p>
+<div class="music-btn" id="musicBtn">
 
-        <button id="startBtn">
-            ✨ شروع سفر ✨
-        </button>
+🔊
 
-    </section>
+</div>
 
-    <!-- صحنه دوم -->
-    <section class="scene" id="scene2">
+<section id="intro" class="scene active">
 
-        <h1 class="big-text">
-            ✨ اولین نگاه ✨
-        </h1>
+<div class="introBox">
 
-        <p class="story"></p>
+<h3 class="fade1">
+A Story
+</h3>
 
-    </section>
+<h2 class="fade2">
+About
+</h2>
 
-    <!-- صحنه سوم -->
-    <section class="scene" id="scene3">
+<h1 class="fade3">
+Two Hearts
+</h1>
 
-        <h1 class="big-text">
-            ❤️ حقیقت ❤️
-        </h1>
+<p class="fade4">
 
-        <p class="story"></p>
+Amin ❤️ Mobina
 
-    </section>
+</p>
 
-    <!-- صحنه چهارم -->
-    <section class="scene" id="scene4">
+<button id="startBtn">
 
-        <h1 class="big-text">
-            🌌 پایان نیست...
-        </h1>
+شروع سفر
 
-        <p class="story"></p>
+</button>
 
-    </section>
+</div>
 
-    <script src="script.js"></script>
+</section>
+
+<section class="scene" id="scene1">
+
+<div class="content">
+
+<h1>
+
+✨ اولین آشنایی ✨
+
+</h1>
+
+<p class="story"></p>
+
+</div>
+
+</section>
+
+<section class="scene" id="scene2">
+
+<div class="content">
+
+<h1>
+
+❤️ اولین دیدار ❤️
+
+</h1>
+
+<p class="story"></p>
+
+</div>
+
+</section>
+
+<section class="scene" id="scene3">
+
+<div class="content">
+
+<h1>
+
+🌌 عشق
+
+</h1>
+
+<p class="story"></p>
+
+</div>
+
+</section>
+
+<section class="scene" id="scene4">
+
+<div class="content end">
+
+<h1>
+
+Forever
+
+</h1>
+
+<h2>
+
+Amin ❤️ Mobina
+
+</h2>
+
+<p class="story"></p>
+
+</div>
+
+</section>
+
+<script src="script.js"></script>
 
 </body>
 
