@@ -1,5 +1,6 @@
 // =====================
-// CINEMATIC ENGINE FINAL FIXED
+// FINAL LOVE CINEMATIC ENGINE
+// Amin ❤️ Mobina
 // =====================
 
 const music = document.getElementById("bgMusic");
@@ -15,21 +16,56 @@ const scenes = [
 
 const texts = [
   "",
-  `همه چیز از یک نگاه شروع شد...
-و دنیا برایم عوض شد...`,
 
-  `حقیقت این است...
-تو تبدیل به آرامش قلب من شدی...`,
+  `همه چیز از یک آشنایی ساده شروع شد...
 
-  `از همان لحظه همه چیز تغییر کرد...
+النا...
+یک کودک کوچک...
+که بی‌خبر بود، قرار است دو قلب را به هم وصل کند...
 
+و این‌گونه بود که امین و مبینا،
+در مسیر هم قرار گرفتند...`,
+
+  `۱۳ اردی‌بهشت ۱۴۰۵...
+
+اولین دیدار...
+
+امین:
+همه چیز وقتی دیدمت متوقف شد...
+
+مبینا:
+و من فقط یک قرمه‌سبزی آوردم...
+اما نمی‌دانستم همان لحظه...
+شروع یک داستان واقعی بود...`,
+
+  `بعد از آن روز...
+
+امین:
+تو فقط یک آدم نبودی...
+
+تو تبدیل شدی به آرامش من...
+
+مبینا:
+و من فهمیدم...
+برخی آدم‌ها برای ماندن ساخته شده‌اند...
+
+امین:
 هَناسکم...
 باوانَکَم...
 چاوَیلِم...`,
 
-  `پایان نیست...
-این فقط شروع یک احساس ابدی است... ❤️
-13 اردی‌بهشت 1405`
+  `این پایان نیست...
+
+این فقط یک شروع است...
+
+با هم:
+
+۱۳ اردی‌بهشت ۱۴۰۵
+روز آغاز ما...
+
+و ادامه‌ای که هیچ‌وقت تمام نمی‌شود...
+
+❤️ Amin & Mobina ❤️`
 ];
 
 let isMusicPlaying = false;
@@ -37,20 +73,15 @@ let isMusicPlaying = false;
 // =====================
 // START EXPERIENCE
 // =====================
-startBtn.addEventListener("click", startExperience);
-
-function startExperience() {
+startBtn.addEventListener("click", () => {
   startBtn.style.display = "none";
-
   playMusic();
-
   showScene(1);
-
   scheduleScenes();
-}
+});
 
 // =====================
-// SCENE TIMELINE (SAFE & SYNC)
+// TIMELINE (FIXED CINEMATIC FLOW)
 // =====================
 function scheduleScenes() {
   setTimeout(() => showScene(2), 8000);
@@ -59,7 +90,7 @@ function scheduleScenes() {
 }
 
 // =====================
-// MUSIC CONTROL
+// MUSIC ENGINE
 // =====================
 function playMusic() {
   music.volume = 0;
@@ -68,7 +99,7 @@ function playMusic() {
     isMusicPlaying = true;
     fadeInMusic();
   }).catch(() => {
-    console.log("Autoplay blocked");
+    console.log("Music blocked until user interaction");
   });
 }
 
@@ -86,7 +117,7 @@ function fadeInMusic() {
 }
 
 // =====================
-// SCENE SWITCHER
+// SCENE ENGINE
 // =====================
 function showScene(index) {
   scenes.forEach(s => s.classList.remove("active"));
@@ -104,7 +135,7 @@ function showScene(index) {
 }
 
 // =====================
-// TYPEWRITER
+// TYPEWRITER ENGINE
 // =====================
 function typeWriter(el, text) {
   el.innerHTML = "";
@@ -123,16 +154,6 @@ function typeWriter(el, text) {
 }
 
 // =====================
-// MUSIC BUTTON
+// MUSIC TOGGLE
 // =====================
-musicBtn.addEventListener("click", () => {
-  if (!isMusicPlaying) {
-    music.play();
-    isMusicPlaying = true;
-    musicBtn.innerHTML = "🔊";
-  } else {
-    music.pause();
-    isMusicPlaying = false;
-    musicBtn.innerHTML = "🔇";
-  }
-});
+musicBtn.add
