@@ -1,5 +1,3 @@
-/* ===== تنظیمات کلی ===== */
-
 *{
     margin:0;
     padding:0;
@@ -7,197 +5,112 @@
 }
 
 body{
-    background:#000;
+    background:black;
     color:white;
-    font-family:Tahoma,sans-serif;
+    font-family:tahoma;
     overflow:hidden;
     height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
 }
 
-/* ===== پس زمینه ===== */
-
+/* پس زمینه */
 .background{
     position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:
-    radial-gradient(circle at top,#2b2200,#000 70%);
+    inset:0;
+    background:radial-gradient(circle at top,#2b1a00,#000 70%);
     z-index:-5;
 }
 
-/* ===== ستاره ها ===== */
-
-.stars{
-    position:fixed;
+/* صحنه ها */
+.scene{
+    position:absolute;
     width:100%;
     height:100%;
-    overflow:hidden;
-    z-index:-4;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    transform:scale(1.1);
+    transition:1s ease;
 }
 
-/* ===== محتوای اصلی ===== */
-
-.container{
-    text-align:center;
-    padding:20px;
+.scene.active{
+    opacity:1;
+    transform:scale(1);
 }
 
-.top-text{
-
-    color:#d4af37;
-    font-size:22px;
-    letter-spacing:2px;
-    margin-bottom:25px;
-
-}
-
+/* عنوان */
 .title{
-
-    font-size:75px;
-    color:#FFD700;
-
-    text-shadow:
-    0 0 10px gold,
-    0 0 25px gold,
-    0 0 45px gold;
-
-    animation:glow 2s infinite alternate;
-
+    font-size:70px;
+    color:gold;
+    text-shadow:0 0 30px gold;
+    animation:pulse 2s infinite;
 }
 
-.subtitle{
+/* متن بزرگ */
+.big-text{
+    font-size:50px;
+    color:#ffd700;
+    text-shadow:0 0 20px gold;
+}
 
-    margin-top:25px;
-    color:#ddd;
-    line-height:2;
+/* متن داستان */
+.story{
     font-size:22px;
-
+    width:70%;
+    line-height:2;
+    margin-top:20px;
+    color:#ddd;
+    min-height:80px;
 }
 
+/* دکمه */
 button{
-
-    margin-top:40px;
-
-    padding:16px 45px;
-
+    margin-top:30px;
+    padding:15px 40px;
     border:none;
-
-    border-radius:50px;
-
-    background:linear-gradient(45deg,#FFD700,#c89b00);
-
-    color:black;
-
-    font-size:20px;
-
+    border-radius:40px;
+    background:gold;
     cursor:pointer;
-
-    transition:.4s;
-
+    font-size:18px;
+    transition:.3s;
 }
 
 button:hover{
-
-    transform:scale(1.08);
-
-    box-shadow:
-    0 0 20px gold,
-    0 0 50px gold;
-
+    transform:scale(1.1);
+    box-shadow:0 0 30px gold;
 }
 
-/* ===== قلب ===== */
-
-.heart{
-
-    position:fixed;
-
-    color:#ff4d6d;
-
-    animation:float 7s linear forwards;
-
-    opacity:.8;
-
-}
-
-/* ===== ستاره ===== */
-
+/* ستاره */
 .star{
-
     position:fixed;
-
     width:3px;
-
     height:3px;
-
     background:gold;
-
     border-radius:50%;
-
-    animation:blink 2s infinite alternate;
-
+    animation:blink 2s infinite;
 }
 
-/* ===== انیمیشن ها ===== */
+/* قلب */
+.heart{
+    position:fixed;
+    color:pink;
+    animation:float 6s linear forwards;
+}
 
-@keyframes glow{
-
-    from{
-
-        text-shadow:
-        0 0 10px gold,
-        0 0 20px gold;
-
-    }
-
-    to{
-
-        text-shadow:
-        0 0 25px gold,
-        0 0 50px gold,
-        0 0 80px gold;
-
-    }
-
+/* انیمیشن */
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
 }
 
 @keyframes float{
-
-    from{
-
-        transform:translateY(0) scale(1);
-
-        opacity:1;
-
-    }
-
-    to{
-
-        transform:translateY(-110vh) scale(2);
-
-        opacity:0;
-
-    }
-
+    from{transform:translateY(0);}
+    to{transform:translateY(-120vh);}
 }
 
 @keyframes blink{
-
-    from{
-
-        opacity:.2;
-
-    }
-
-    to{
-
-        opacity:1;
-
-    }
-
+    from{opacity:.2;}
+    to{opacity:1;}
 }
