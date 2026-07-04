@@ -1,99 +1,781 @@
-const music = document.getElementById("bgMusic");
-const startBtn = document.getElementById("startBtn");
-const musicBtn = document.getElementById("musicBtn");
+/* ===========================
+   CINEMATIC LOVE PROJECT
+   Amin ❤️ Mobina
+===========================*/
 
-const scenes = [
-  document.getElementById("scene1"),
-  document.getElementById("scene2"),
-  document.getElementById("scene3"),
-  document.getElementById("scene4")
-];
-
-const texts = [
-  "",
-  "همه چیز از یک نگاه شروع شد...\nو دنیا برایم تغییر کرد...",
-  "تو تبدیل شدی به آرامش قلب من...\nبه چیزی که همیشه دنبالش بودم...",
-  "این پایان نیست...\nاین یک عشق بی‌پایان است ❤️"
-];
-
-let isPlaying = false;
-
-// ================= START =================
-startBtn.addEventListener("click", start);
-
-function start() {
-  startBtn.style.display = "none";
-
-  playMusic();
-
-  showScene(0);
-
-  setTimeout(() => showScene(1), 7000);
-  setTimeout(() => showScene(2), 15000);
-  setTimeout(() => showScene(3), 23000);
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-// ================= MUSIC =================
-function playMusic() {
-  music.volume = 0;
-
-  music.play().then(() => {
-    isPlaying = true;
-    fadeIn();
-  }).catch(() => {
-    console.log("Autoplay blocked");
-  });
+html{
+scroll-behavior:smooth;
 }
 
-function fadeIn() {
-  let v = 0;
-  const t = setInterval(() => {
-    if (v < 0.6) {
-      v += 0.02;
-      music.volume = v;
-    } else {
-      clearInterval(t);
-    }
-  }, 80);
+body{
+
+font-family:'Vazirmatn',sans-serif;
+
+background:#020611;
+
+overflow:hidden;
+
+color:white;
+
+height:100vh;
+
 }
 
-// ================= SCENES =================
-function showScene(index) {
-  scenes.forEach(s => s.classList.remove("active"));
+/* CANVAS */
 
-  const scene = scenes[index];
-  if (!scene) return;
+#stars{
 
-  scene.classList.add("active");
+position:fixed;
 
-  const story = scene.querySelector(".story");
-  if (story) typeWriter(story, texts[index]);
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+z-index:-5;
+
 }
 
-// ================= TYPEWRITER =================
-function typeWriter(el, text) {
-  el.innerHTML = "";
-  let i = 0;
+/* DARK OVERLAY */
 
-  const t = setInterval(() => {
-    if (i < text.length) {
-      el.innerHTML += text[i];
-      i++;
-    } else {
-      clearInterval(t);
-    }
-  }, 40);
+#overlay{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:
+radial-gradient(circle at center,
+rgba(255,255,255,.05),
+rgba(0,0,0,.88));
+
+z-index:-4;
+
 }
 
-// ================= MUSIC BUTTON =================
-musicBtn.addEventListener("click", () => {
-  if (!isPlaying) {
-    music.play();
-    isPlaying = true;
-    musicBtn.innerHTML = "🔊";
-  } else {
-    music.pause();
-    isPlaying = false;
-    musicBtn.innerHTML = "🔇";
-  }
-});
+/* FLASH */
+
+#flash{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:white;
+
+opacity:0;
+
+pointer-events:none;
+
+z-index:9999;
+
+transition:opacity .8s;
+
+}
+
+/* SCENES */
+
+.scene{
+
+position:absolute;
+
+inset:0;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+opacity:0;
+
+transform:scale(1.15);
+
+filter:blur(25px);
+
+transition:
+
+opacity 2s,
+
+transform 2.5s,
+
+filter 2s;
+
+padding:40px;
+
+}
+
+.scene.active{
+
+opacity:1;
+
+transform:scale(1);
+
+filter:blur(0);
+
+}
+
+/* CONTENT */
+
+.content{
+
+width:min(900px,90vw);
+
+text-align:center;
+
+animation:
+
+float 8s ease-in-out infinite;
+
+}
+
+.content h1{
+
+font-size:clamp(32px,6vw,72px);
+
+font-weight:900;
+
+margin-bottom:35px;
+
+text-shadow:
+
+0 0 25px #fff,
+
+0 0 60px #4ecbff,
+
+0 0 120px #7f5cff;
+
+letter-spacing:2px;
+
+}
+
+.story{
+
+font-size:clamp(18px,2vw,28px);
+
+line-height:2.2;
+
+white-space:pre-line;
+
+font-weight:300;
+
+text-shadow:
+
+0 0 15px rgba(255,255,255,.35);
+
+}
+
+/* INTRO */
+
+.introBox{
+
+text-align:center;
+
+display:flex;
+
+flex-direction:column;
+
+gap:18px;
+
+animation:zoomIntro 4s ease;
+
+}
+
+.introBox h1{
+
+font-size:clamp(50px,8vw,95px);
+
+font-weight:900;
+
+}
+
+.introBox h2{
+
+font-size:40px;
+
+font-weight:400;
+
+}
+
+.introBox h3{
+
+font-size:26px;
+
+font-weight:300;
+
+letter-spacing:8px;
+
+}
+
+.introBox p{
+
+font-size:24px;
+
+opacity:.8;
+
+}
+
+/* BUTTON */
+
+button{
+
+margin-top:45px;
+
+padding:18px 60px;
+
+border:none;
+
+border-radius:60px;
+
+cursor:pointer;
+
+font-size:20px;
+
+font-weight:700;
+
+color:white;
+
+background:
+
+linear-gradient(45deg,#ff4da6,#7f5cff);
+
+box-shadow:
+
+0 0 25px #ff4da6,
+
+0 0 70px #7f5cff;
+
+transition:.4s;
+
+}
+
+button:hover{
+
+transform:scale(1.08);
+
+box-shadow:
+
+0 0 35px #fff,
+
+0 0 90px #ff4da6;
+
+}
+
+/* MUSIC */
+
+.music-btn{
+
+position:fixed;
+
+left:25px;
+
+top:25px;
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(10px);
+
+cursor:pointer;
+
+font-size:24px;
+
+z-index:999;
+
+transition:.4s;
+
+}
+
+.music-btn:hover{
+
+transform:rotate(15deg) scale(1.1);
+
+}
+
+/* FLOAT */
+
+@keyframes float{
+
+0%{transform:translateY(0px);}
+
+50%{transform:translateY(-12px);}
+
+100%{transform:translateY(0px);}
+
+}
+
+@keyframes zoomIntro{
+
+from{
+
+opacity:0;
+
+transform:scale(1.4);
+
+}
+
+to{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
+}
+
+/* Fade */
+
+.fade1{
+
+animation:fade 2s;
+
+}
+
+.fade2{
+
+animation:fade 4s;
+
+}
+
+.fade3{
+
+animation:fade 6s;
+
+}
+
+.fade4{
+
+animation:fade 8s;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+/* ===========================
+   HEARTS
+=========================== */
+
+#hearts{
+position:fixed;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+z-index:-1;
+}
+
+.heart{
+
+position:absolute;
+
+bottom:-50px;
+
+font-size:18px;
+
+animation:heartFloat linear forwards;
+
+opacity:.8;
+
+filter:drop-shadow(0 0 12px #ff4da6);
+
+}
+
+@keyframes heartFloat{
+
+0%{
+
+transform:
+translateY(0)
+scale(.4)
+rotate(0deg);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:
+translateY(-120vh)
+scale(1.6)
+rotate(360deg);
+
+opacity:0;
+
+}
+
+}
+
+/* ===========================
+   SHOOTING STARS
+=========================== */
+
+.shooting{
+
+position:fixed;
+
+width:2px;
+height:2px;
+
+background:white;
+
+border-radius:50%;
+
+box-shadow:
+
+0 0 10px white,
+0 0 25px white,
+0 0 45px #67b7ff;
+
+animation:shoot 2s linear forwards;
+
+z-index:-2;
+
+}
+
+@keyframes shoot{
+
+0%{
+
+transform:
+translate(0,0)
+scale(1);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:
+translate(-700px,350px)
+scale(.2);
+
+opacity:0;
+
+}
+
+}
+
+/* ===========================
+   GLOW
+=========================== */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+width:700px;
+height:700px;
+
+left:50%;
+top:50%;
+
+transform:translate(-50%,-50%);
+
+background:
+
+radial-gradient(circle,
+rgba(127,92,255,.18),
+transparent 70%);
+
+filter:blur(120px);
+
+animation:glowMove 12s ease infinite;
+
+z-index:-3;
+
+}
+
+@keyframes glowMove{
+
+0%{
+
+transform:
+translate(-50%,-50%)
+scale(1);
+
+}
+
+50%{
+
+transform:
+translate(-45%,-55%)
+scale(1.3);
+
+}
+
+100%{
+
+transform:
+translate(-50%,-50%)
+scale(1);
+
+}
+
+}
+
+/* ===========================
+   END SCENE
+=========================== */
+
+.end h1{
+
+font-size:90px;
+
+letter-spacing:10px;
+
+margin-bottom:25px;
+
+text-shadow:
+
+0 0 20px white,
+
+0 0 50px #ff4da6,
+
+0 0 120px #7f5cff;
+
+}
+
+.end h2{
+
+font-size:42px;
+
+margin-bottom:35px;
+
+font-weight:300;
+
+color:#ffd8f3;
+
+}
+
+/* ===========================
+   CURSOR
+=========================== */
+
+.story::after{
+
+content:"|";
+
+animation:blink .8s infinite;
+
+margin-right:5px;
+
+}
+
+@keyframes blink{
+
+50%{
+
+opacity:0;
+
+}
+
+}
+
+/* ===========================
+   SCENE ZOOM
+=========================== */
+
+.scene.active .content{
+
+animation:
+
+camera 10s linear forwards,
+
+float 7s ease-in-out infinite;
+
+}
+
+@keyframes camera{
+
+0%{
+
+transform:scale(1);
+
+}
+
+100%{
+
+transform:scale(1.08);
+
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:900px){
+
+.scene{
+
+padding:25px;
+
+}
+
+.content{
+
+width:95%;
+
+}
+
+.content h1{
+
+font-size:40px;
+
+}
+
+.story{
+
+font-size:20px;
+
+line-height:2;
+
+}
+
+.introBox h1{
+
+font-size:52px;
+
+}
+
+.introBox h2{
+
+font-size:28px;
+
+}
+
+.introBox h3{
+
+font-size:18px;
+
+letter-spacing:5px;
+
+}
+
+.introBox p{
+
+font-size:18px;
+
+}
+
+button{
+
+width:100%;
+
+font-size:20px;
+
+padding:18px;
+
+}
+
+.music-btn{
+
+left:15px;
+top:15px;
+
+width:48px;
+height:48px;
+
+font-size:20px;
+
+}
+
+}
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+
+@media(max-width:480px){
+
+.content h1{
+
+font-size:32px;
+
+}
+
+.story{
+
+font-size:18px;
+
+}
+
+.end h1{
+
+font-size:50px;
+
+}
+
+.end h2{
+
+font-size:24px;
+
+}
+
+.introBox h1{
+
+font-size:42px;
+
+}
+
+button{
+
+font-size:18px;
+
+}
+
+}
