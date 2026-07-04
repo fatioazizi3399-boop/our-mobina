@@ -1,5 +1,5 @@
 // =====================
-// CINEMATIC ENGINE FINAL
+// CINEMATIC ENGINE FINAL FIXED
 // =====================
 
 const music = document.getElementById("bgMusic");
@@ -15,12 +15,23 @@ const scenes = [
 
 const texts = [
   "",
-  "همه چیز از یک نگاه شروع شد...\nو دنیا برایم عوض شد...",
-  "حقیقت این است...\nتو تبدیل به آرامش قلب من شدی...",
-  "پایان نیست...\nاین فقط شروع یک احساس ابدی است... ❤️"
+  `همه چیز از یک نگاه شروع شد...
+و دنیا برایم عوض شد...`,
+
+  `حقیقت این است...
+تو تبدیل به آرامش قلب من شدی...`,
+
+  `از همان لحظه همه چیز تغییر کرد...
+
+هَناسکم...
+باوانَکَم...
+چاوَیلِم...`,
+
+  `پایان نیست...
+این فقط شروع یک احساس ابدی است... ❤️
+13 اردی‌بهشت 1405`
 ];
 
-let currentScene = 0;
 let isMusicPlaying = false;
 
 // =====================
@@ -35,6 +46,13 @@ function startExperience() {
 
   showScene(1);
 
+  scheduleScenes();
+}
+
+// =====================
+// SCENE TIMELINE (SAFE & SYNC)
+// =====================
+function scheduleScenes() {
   setTimeout(() => showScene(2), 8000);
   setTimeout(() => showScene(3), 16000);
   setTimeout(() => showScene(4), 24000);
@@ -64,37 +82,39 @@ function fadeInMusic() {
     } else {
       clearInterval(fade);
     }
-  }, 100);
+  }, 80);
 }
 
 // =====================
-// SCENE CONTROLLER
+// SCENE SWITCHER
 // =====================
-function showScene(num) {
+function showScene(index) {
   scenes.forEach(s => s.classList.remove("active"));
 
-  const scene = scenes[num - 1];
+  const scene = scenes[index - 1];
+  if (!scene) return;
+
   scene.classList.add("active");
 
-  currentScene = num;
+  const story = scene.querySelector(".story");
 
-  typeWriter(scene.querySelector(".story"), texts[num - 1]);
+  if (story) {
+    typeWriter(story, texts[index - 1]);
+  }
 }
 
 // =====================
-// TYPEWRITER EFFECT
+// TYPEWRITER
 // =====================
 function typeWriter(el, text) {
-  if (!el) return;
-
   el.innerHTML = "";
   let i = 0;
 
-  const speed = 40;
+  const speed = 35;
 
   const t = setInterval(() => {
     if (i < text.length) {
-      el.innerHTML += text.charAt(i);
+      el.innerHTML += text[i];
       i++;
     } else {
       clearInterval(t);
@@ -103,7 +123,7 @@ function typeWriter(el, text) {
 }
 
 // =====================
-// MUSIC BUTTON TOGGLE
+// MUSIC BUTTON
 // =====================
 musicBtn.addEventListener("click", () => {
   if (!isMusicPlaying) {
@@ -116,58 +136,3 @@ musicBtn.addEventListener("click", () => {
     musicBtn.innerHTML = "🔇";
   }
 });
-const texts = [
-  "",
-  
-  `این فقط یک آشنایی ساده نبود...
-
-همه چیز از یک کودک شروع شد...
-النا...
-
-یک دختر کوچولو که بی‌خبر بود،
-قرار است دو قلب را به هم برساند.
-
-و این‌گونه بود که امین و مبینا،
-بی‌هیچ برنامه‌ای،
-در مسیر هم قرار گرفتند...`,
-
-  `۱۳ اردی‌بهشت ۱۴۰۵...
-
-روزی که ساده شروع شد،
-اما دیگر هیچ‌وقت ساده باقی نماند.
-
-اولین دیدار...
-
-و تو با یک قرمه‌سبزی آمدی...
-
-شاید برای تو فقط یک غذا بود،
-اما برای من...
-
-شروع واقعیِ یک احساس بود...`,
-
-  `از همان لحظه، همه چیز تغییر کرد...
-
-دیگر "آشنا شدن" معنایی نداشت،
-چون تو تبدیل شدی به بخشی از من.
-
-و من تو را این‌گونه صدا می‌زنم...
-
-هَناسکم...
-باوانَکَم...
-چاوَیلِم...
-
-کلماتی که فقط برای تو ساخته شدند...`,
-
-  `این پایان نیست...
-
-این یک شروع است.
-شروعِ مسیری که اسمش امین و مبیناست...
-
-و اگر دنیا هم بایستد،
-اگر زمان هم تمام شود،
-
-این احساس تمام نخواهد شد...
-
-❤️ ۱۳ اردی‌بهشت ۱۴۰۵
-روز شروعِ ما...`
-];
