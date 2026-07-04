@@ -1,53 +1,45 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>برای مبینای من ❤️</title>
-
+    <title>For Mobina ❤️</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- پس زمینه -->
+    <!-- افکت ها -->
     <div class="background"></div>
-
-    <!-- ستاره ها -->
     <div class="stars"></div>
-
-    <!-- قلب های متحرک -->
     <div id="hearts"></div>
 
-    <!-- محتوای اصلی -->
-    <div class="container">
+    <!-- صحنه ها -->
+    <div class="scene active" id="scene1">
+        <h3 class="top-text">برای خاص‌ترین دختر دنیا</h3>
+        <h1 class="title">Mobina ❤️</h1>
+        <p class="subtitle">این فقط یک سایت نیست... یک احساسه...</p>
 
-        <h3 class="top-text">
-            برای خاص‌ترین دختر دنیا
-        </h3>
-
-        <h1 class="title">
-            Mobina ❤️
-        </h1>
-
-        <p class="subtitle">
-            هر چیزی که اینجا می‌بینی...
-            <br>
-            فقط برای تو ساخته شده...
-        </p>
-
-        <button id="startBtn">
-            شروع سفر عاشقانه ✨
-        </button>
-
+        <button id="startBtn">شروع سفر ✨</button>
     </div>
 
-    <!-- فایل جاوااسکریپت -->
-    <script src="script.js"></script>
+    <div class="scene" id="scene2">
+        <h1 class="big-text">✨ اولین نگاه ✨</h1>
+        <p class="story"></p>
+    </div>
 
+    <div class="scene" id="scene3">
+        <h1 class="big-text">❤️ حقیقت</h1>
+        <p class="story"></p>
+    </div>
+
+    <div class="scene" id="scene4">
+        <h1 class="big-text">🌌 پایان نیست...</h1>
+        <p class="story"></p>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
