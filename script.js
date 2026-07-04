@@ -78,3 +78,68 @@ document.getElementById("startBtn").onclick=()=>{
         "و این داستان... تازه شروعشه ❤️");
     },12000);
 };
+// ===============================
+// موزیک
+// ===============================
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+let isPlaying = false;
+
+function toggleMusic(){
+    if(isPlaying){
+        music.pause();
+        musicBtn.innerHTML = "🔇";
+    }else{
+        music.play();
+        musicBtn.innerHTML = "🔊";
+    }
+    isPlaying = !isPlaying;
+}
+
+musicBtn.onclick = toggleMusic;
+
+// شروع خودکار بعد از کلیک (مهم برای مرورگرها)
+document.body.addEventListener("click", ()=>{
+    if(!isPlaying){
+        music.play().catch(()=>{});
+        isPlaying = true;
+        musicBtn.innerHTML = "🔊";
+    }
+}, {once:true});
+
+
+// ===============================
+// شروع سینمایی + موزیک هماهنگ
+// ===============================
+const startBtn = document.getElementById("startBtn");
+
+startBtn.onclick = () => {
+
+    music.play().catch(()=>{});
+    isPlaying = true;
+
+    current = 1;
+    showScene(current);
+
+    setTimeout(()=>{
+        typeText(document.querySelector("#scene2 .story"),
+        "از لحظه‌ای که دیدمت، دنیا آروم‌تر شد... انگار همه چیز معنی پیدا کرد...");
+    },800);
+
+    setTimeout(()=>{
+        current = 2;
+        showScene(current);
+
+        typeText(document.querySelector("#scene3 .story"),
+        "تو فقط یک اسم نیستی... تو دلیل تپش این قلبی ❤️");
+    },6000);
+
+    setTimeout(()=>{
+        current = 3;
+        showScene(current);
+
+        typeText(document.querySelector("#scene4 .story"),
+        "و این فقط شروع یک داستان عاشقانه واقعی است...");
+    },12000);
+};
