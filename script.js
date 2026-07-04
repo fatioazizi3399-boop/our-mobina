@@ -1,18 +1,20 @@
+// ===============================
 // ساخت ستاره ها
+// ===============================
 
-const stars=document.querySelector(".stars");
+const stars = document.querySelector(".stars");
 
-for(let i=0;i<120;i++){
+for (let i = 0; i < 150; i++) {
 
-    const star=document.createElement("div");
+    const star = document.createElement("div");
 
-    star.className="star";
+    star.className = "star";
 
-    star.style.left=Math.random()*100+"%";
+    star.style.left = Math.random() * 100 + "%";
 
-    star.style.top=Math.random()*100+"%";
+    star.style.top = Math.random() * 100 + "%";
 
-    star.style.animationDelay=Math.random()*3+"s";
+    star.style.animationDelay = Math.random() * 3 + "s";
 
     stars.appendChild(star);
 
@@ -20,46 +22,80 @@ for(let i=0;i<120;i++){
 
 
 
-// ساخت قلب ها
+// ===============================
+// قلب ها
+// ===============================
 
-const hearts=document.getElementById("hearts");
+const hearts = document.getElementById("hearts");
 
-function createHeart(){
+let heartSpeed = 350;
 
-    const heart=document.createElement("div");
+function createHeart() {
 
-    heart.className="heart";
+    const heart = document.createElement("div");
 
-    heart.innerHTML="❤️";
+    heart.className = "heart";
 
-    heart.style.left=Math.random()*100+"vw";
+    heart.innerHTML = "❤️";
 
-    heart.style.bottom="-30px";
+    heart.style.left = Math.random() * 100 + "vw";
 
-    heart.style.fontSize=(20+Math.random()*30)+"px";
+    heart.style.bottom = "-40px";
 
-    heart.style.animationDuration=(4+Math.random()*4)+"s";
+    heart.style.fontSize = (20 + Math.random() * 25) + "px";
+
+    heart.style.animationDuration = (4 + Math.random() * 3) + "s";
 
     hearts.appendChild(heart);
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
         heart.remove();
 
-    },8000);
+    }, 8000);
 
 }
 
-setInterval(createHeart,350);
+setInterval(() => {
+
+    createHeart();
+
+}, heartSpeed);
 
 
 
+// ===============================
 // دکمه
+// ===============================
 
-const btn=document.getElementById("startBtn");
+const btn = document.getElementById("startBtn");
 
-btn.onclick=function(){
+const title = document.querySelector(".title");
 
-    alert("این تازه شروعشه... ❤️");
+const subtitle = document.querySelector(".subtitle");
 
-}
+btn.onclick = () => {
+
+    title.innerHTML = "❤️ Mobina ❤️";
+
+    subtitle.innerHTML = `
+
+    از وقتی وارد زندگیم شدی...
+
+    <br><br>
+
+    دنیا قشنگ‌تر شده...
+
+    <br><br>
+
+    این تازه اول سورپرایزه...
+
+    `;
+
+    btn.innerHTML = "دوستت دارم ❤️";
+
+    btn.style.background = "gold";
+
+    btn.style.boxShadow = "0 0 40px gold";
+
+};
